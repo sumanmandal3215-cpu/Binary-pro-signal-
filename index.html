@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binomo AI Pro Signal Bot - Hindi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #080c14;
+            --neon-green: #39ff14;
+            --neon-blue: #00f0ff;
+            --neon-red: #ff3131;
+            --neon-yellow: #fff01f;
+            --neon-purple: #b50fe4;
+            --card-bg: #111823;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(145deg, #151d2a, #080c14);
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7), 0 0 20px rgba(0, 240, 255, 0.15);
+            overflow: hidden;
+            padding: 22px;
+            box-sizing: border-box;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* Top Header & Robot Area */
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 2px solid rgba(255,255,255,0.05);
+            margin-bottom: 20px;
+        }
+
+        .robot-box {
+            font-size: 55px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px var(--neon-blue), 0 0 40px rgba(0,240,255,0.3);
+            animation: float 2.5s ease-in-out infinite;
+            margin-bottom: 5px;
+            transition: color 0.5s ease, text-shadow 0.5s ease;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        .bot-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 1.5px;
+        }
+        .bot-title span.pro { color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow); }
+        .bot-title span.ai { color: var(--neon-red); text-shadow: 0 0 10px var(--neon-red); }
+
+        .session-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.04);
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--neon-green);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+            margin-right: 6px;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Analytics Section */
+        .analytics-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .accuracy-box {
+            flex: 1;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 18px 10px;
+            text-align: center;
+            border: 2px solid var(--neon-green);
+            box-shadow: inset 0 0 12px rgba(57, 255, 20, 0.15), 0 0 15px rgba(57, 255, 20, 0.2);
+        }
+        .accuracy-circle {
+            font-size: 38px;
+            font-weight: 900;
+            color: var(--neon-green);
+            text-shadow: 0 0 15px rgba(57, 255, 20, 0.6);
+        }
+        .box-label {
+            font-size: 11px;
+            color: #a0aec0;
+            text-transform: uppercase;
+            margin-top: 8px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .data-box {
+            flex: 1;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 18px 10px;
+            text-align: center;
+            border: 2px solid var(--neon-blue);
+            box-shadow: inset 0 0 12px rgba(0, 240, 255, 0.15), 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+        .data-value {
+            font-size: 34px;
+            font-weight: bold;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Form Controls */
+        .control-group {
+            margin-bottom: 20px;
+        }
+        .control-group label {
+            display: block;
+            font-size: 12px;
+            color: #a0aec0;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .control-group label i {
+            margin-right: 5px;
+            color: var(--neon-yellow);
+        }
+        .control-group select {
+            width: 100%;
+            background: #192231;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 14px 15px;
+            border-radius: 14px;
+            color: white;
+            font-size: 15px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .control-group select:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+            background: #202b3e;
+        }
+
+        /* Signal Output Area */
+        .signal-display {
+            background: rgba(0,0,0,0.5);
+            border: 2px dashed rgba(255,255,255,0.15);
+            border-radius: 22px;
+            padding: 28px;
+            text-align: center;
+            margin: 25px 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .signal-text {
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #4a5568;
+        }
+
+        /* Action Button */
+        .btn-get-signal {
+            width: 100%;
+            background: linear-gradient(90deg, #ff007f, #7f00ff);
+            border: none;
+            padding: 18px;
+            border-radius: 16px;
+            color: white;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(127, 0, 255, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+        }
+        .btn-get-signal:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 0, 127, 0.5), 0 0 15px var(--neon-purple);
+        }
+        .btn-get-signal:disabled {
+            background: #2d3748;
+            box-shadow: none;
+            cursor: not-allowed;
+            color: #718096;
+        }
+
+        /* Footer Navigation */
+        .footer-nav {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 25px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .nav-item {
+            text-align: center;
+            color: #718096;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .nav-item.active, .nav-item:hover {
+            color: var(--neon-yellow);
+            text-shadow: 0 0 8px rgba(255, 240, 31, 0.4);
+        }
+        .nav-item i {
+            font-size: 22px;
+            display: block;
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="header">
+            <div class="robot-box" id="robotFace">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="bot-title">TEXT <span class="ai">AI</span> <span class="pro">PRO</span></div>
+        </div>
+
+        <div class="session-info">
+            <div>ID: <span style="color: var(--neon-blue); font-weight:bold;">🤖 HINDI-BOT-V2</span></div>
+            <div><span class="status-dot"></span>SECURE SESSION</div>
+        </div>
+
+        <div class="analytics-row">
+            <div class="accuracy-box" id="accBox">
+                <div class="accuracy-circle" id="winRate">98%</div>
+                <div class="box-label">AI Accuracy</div>
+            </div>
+            <div class="data-box" id="dataBox">
+                <div class="data-value" id="dataAnalytics">82-64</div>
+                <div class="box-label">Data Analytics</div>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label><i class="fa-solid fa-earth-americas"></i> Choose Binomo Market (Flags & Colors)</label>
+            <select id="marketSelect">
+                <option value="Crypto IDX" data-lang="क्रिप्टो आई डी एक्स" selected>🌐 Crypto IDX (Global)</option>
+                <option value="EUR/USD" data-lang="ई यू आर यू एस डी">🇪🇺🇺🇸 EUR/USD (Euro / US Dollar)</option>
+                <option value="GBP/USD" data-lang="जी बी पी यू एस डी">🇬🇧🇺🇸 GBP/USD (UK Pound / US Dollar)</option>
+                <option value="USD/JPY" data-lang="यू एस डी जे पी वाई">🇺🇸🇯🇵 USD/JPY (US Dollar / Japan Yen)</option>
+                <option value="AUD/USD" data-lang="ए यू डी यू एस डी">🇦🇺🇺🇸 AUD/USD (Aus Dollar / US Dollar)</option>
+                <option value="EUR/JPY" data-lang="ई यू आर जे पी वाई">🇪🇺🇯🇵 EUR/JPY (Euro / Japan Yen)</option>
+                <option value="Bitcoin" data-lang="बिटकॉइन">🪙 Bitcoin (BTC)</option>
+                <option value="Ethereum" data-lang="इथेरियम">🪙 Ethereum (ETH)</option>
+                <option value="Litecoin" data-lang="लाइटकॉइन">🪙 Litecoin (LTC)</option>
+                <option value="Gold" data-lang="गोल्ड">👑 Gold (XAU)</option>
+                <option value="Apple Stock" data-lang="एप्पल स्टॉक">🍏 Apple Stock (USA)</option>
+                <option value="Google Stock" data-lang="गूगल स्टॉक">🔍 Google Stock (USA)</option>
+                <option value="EUR/GBP" data-lang="ई यू आर जी बी पी">🇪🇺🇬🇧 EUR/GBP (Euro / UK Pound)</option>
+                <option value="CAD/JPY" data-lang="सी ए डी जे पी वाई">🇨🇦🇯🇵 CAD/JPY (Canada Dollar / Japan Yen)</option>
+                <option value="NZD/USD" data-lang="एन जेड डी यू एस डी">🇳🇿🇺🇸 NZD/USD (NZ Dollar / US Dollar)</option>
+                <option value="Altcoin IDX" data-lang="ऑल्टकॉइन आई डी एक्स">🌐 Altcoin IDX (Global)</option>
+                <option value="Asia Composite Index" data-lang="एशिया कम्पोजिट इंडेक्स">🌏 Asia Composite Index</option>
+                <option value="Commodity IDX" data-lang="कमोडिटी आई डी एक्स">📦 Commodity IDX</option>
+                <option value="Euro Composite Index" data-lang="यूरो कम्पोजिट इंडेक्स">🇪🇺 Euro Composite Index</option>
+                <option value="USD/INR" data-lang="यू एस डी आई एन आर">🇺🇸🇮🇳 USD/INR (US Dollar / Indian Rupee)</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label><i class="fa-regular fa-clock"></i> Trading Time</label>
+            <select id="timeSelect">
+                <option value="15 सेकंड">15 Second (Turbo)</option>
+                <option value="30 सेकंड">30 Second (Turbo)</option>
+                <option value="1 मिनट" selected>1 Minute (Turbo)</option>
+                <option value="2 मिनट">2 Minute</option>
+                <option value="3 मिनट">3 Minute</option>
+                <option value="5 मिनट">5 Minute</option>
+                <option value="15 मिनट">15 Minute</option>
+                <option value="30 मिनट">30 Minute</option>
+                <option value="1 घंटा">1 Hour</option>
+                <option value="2 घंटा">2 Hour</option>
+            </select>
+        </div>
+
+        <div class="signal-display" id="signalDisplay">
+            <div class="signal-text" id="signalText">READY TO ANALYZE</div>
+        </div>
+
+        <button class="btn-get-signal" id="getSignalBtn">
+            <i class="fas fa-bolt" style="color: var(--neon-yellow);"></i> GET BINOMO SIGNAL
+        </button>
+
+        <div class="footer-nav">
+            <div class="nav-item active">
+                <i class="fas fa-chart-bar" style="color: var(--neon-blue);"></i>
+                Signals
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-trophy" style="color: var(--neon-yellow);"></i>
+                VIP
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-headset" style="color: var(--neon-purple);"></i>
+                Support
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const getSignalBtn = document.getElementById('getSignalBtn');
+        const signalDisplay = document.getElementById('signalDisplay');
+        const signalText = document.getElementById('signalText');
+        const winRateEl = document.getElementById('winRate');
+        const dataAnalyticsEl = document.getElementById('dataAnalytics');
+        const robotFace = document.getElementById('robotFace');
+        const marketSelect = document.getElementById('marketSelect');
+        const timeSelect = document.getElementById('timeSelect');
+
+        // TTS (Text to Speech) Function optimized for Hindi (hi-IN)
+        function askRobotToSpeak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); 
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'hi-IN'; // Set language to Hindi
+                utterance.pitch = 1.0;
+                utterance.rate = 0.95; // Speech speed
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Market Change Interaction (Hindi)
+        marketSelect.addEventListener('change', () => {
+            const selectedOption = marketSelect.options[marketSelect.selectedIndex];
+            const marketHindiName = selectedOption.getAttribute('data-lang');
+            const msg = `${marketHindiName} मार्केट सेलेक्ट किया गया है। सिग्नल के लिए नीचे बटन दबाएं।`;
+            askRobotToSpeak(msg);
+        });
+
+        // Main Logic for Signal Generation
+        getSignalBtn.addEventListener('click', () => {
+            getSignalBtn.disabled = true;
+            robotFace.style.color = 'var(--neon-yellow)'; 
+            robotFace.style.textShadow = '0 0 25px var(--neon-yellow)';
+            
+            signalText.innerText = "ANALYZING...";
+            signalText.style.color = "var(--neon-yellow)";
+            signalDisplay.style.borderColor = "var(--neon-yellow)";
+            signalDisplay.style.boxShadow = "0 0 15px rgba(255, 240, 31, 0.2)";
+
+            askRobotToSpeak("मार्केट डेटा एनालिसिस किया जा रहा है, कृपया प्रतीक्षा करें।");
+
+            // Randomizing Data Numbers during analysis
+            let counter = 0;
+            const interval = setInterval(() => {
+                winRateEl.innerText = Math.floor(Math.random() * (99 - 85) + 85) + "%";
+                dataAnalyticsEl.innerText = Math.floor(Math.random() * 100) + "-" + Math.floor(Math.random() * 100);
+                counter++;
+                if(counter > 12) clearInterval(interval);
+            }, 120);
+
+            // Final Output after 2.5 seconds
+            setTimeout(() => {
+                const randWinRate = Math.floor(Math.random() * (99 - 92) + 92); // 92% to 99%
+                winRateEl.innerText = randWinRate + "%";
+                
+                const num1 = Math.floor(Math.random() * (95 - 70) + 70);
+                const num2 = Math.floor(Math.random() * (65 - 40) + 40);
+                dataAnalyticsEl.innerText = `${num1}-${num2}`;
+
+                const decisions = ['CALL', 'PUT'];
+                const finalDecision = decisions[Math.floor(Math.random() * decisions.length)];
+                
+                const selectedOption = marketSelect.options[marketSelect.selectedIndex];
+                const currentMarketHindi = selectedOption.getAttribute('data-lang');
+                const currentTimeframe = timeSelect.value;
+
+                if (finalDecision === 'CALL') {
+                    // CALL Signal Setup (Green Glowing Theme)
+                    signalText.innerText = "CALL (UP) ⬆️";
+                    signalText.style.color = "var(--neon-green)";
+                    signalText.style.textShadow = "0 0 15px var(--neon-green)";
+                    signalDisplay.style.borderColor = "var(--neon-green)";
+                    signalDisplay.style.boxShadow = "0 0 25px rgba(57, 255, 20, 0.4)";
+                    robotFace.style.color = "var(--neon-green)";
+                    robotFace.style.textShadow = "0 0 25px var(--neon-green)";
+
+                    // Hindi Voice Output
+                    askRobotToSpeak(`${currentMarketHindi} मार्केट में ${currentTimeframe} के लिए कॉल या ऊपर की तरफ ट्रेड ओपन करें।`);
+                } else {
+                    // PUT Signal Setup (Red Glowing Theme)
+                    signalText.innerText = "PUT (DOWN) ⬇️";
+                    signalText.style.color = "var(--neon-red)";
+                    signalText.style.textShadow = "0 0 15px var(--neon-red)";
+                    signalDisplay.style.borderColor = "var(--neon-red)";
+                    signalDisplay.style.boxShadow = "0 0 25px rgba(255, 49, 49, 0.4)";
+                    robotFace.style.color = "var(--neon-red)";
+                    robotFace.style.textShadow = "0 0 25px var(--neon-red)";
+
+                    // Hindi Voice Output
+                    askRobotToSpeak(`${currentMarketHindi} मार्केट में ${currentTimeframe} के लिए पुट या नीचे की तरफ ट्रेड ओपन करें।`);
+                }
+
+                getSignalBtn.disabled = false;
+            }, 2500);
+        });
+
+        // Welcome Greeting on App Load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                askRobotToSpeak("बिनोमो एआई प्रो बॉट में आपका स्वागत है। अपना मार्केट और टाइम सेलेक्ट करें और गेट सिग्नल बटन दबाएं।");
+            }, 1000);
+        });
+    </script>
+</body>
+  </html>
+  
